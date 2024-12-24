@@ -24,6 +24,7 @@ class User extends Authenticatable
         'user_cpf',
         'user_cell',
         'email',
+        'family_id',
         'password',
     ];
 
@@ -48,5 +49,9 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function family(){
+        return $this->belongsTo(Family::class);
     }
 }

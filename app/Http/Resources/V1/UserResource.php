@@ -20,6 +20,7 @@ class UserResource extends JsonResource
             'full_name' => $this->first_name . " " . $this->last_name,
             'user_cpf' => $this->user_cpf,
             'cell_phone' => $this->user_cell,
+            'family_id' => $this->family,
             'email' => $this->email,
         ];
     }

@@ -8,17 +8,27 @@ use App\Models\User;
 use App\Traits\HttpResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Laravel\Sanctum\HasApiTokens;
+
 
 class UserController extends Controller
 {
     use HttpResponse;
+    use HasApiTokens;
     /**
      * Display a listing of the resource.
      */
+
+    //Escolher os métodos dessa classe que irao passar pelo auth(essa é uma das forma, mas nao vou usar ela).
+/*     public function __construct()
+    {
+        $this->middleware('auth:sanctum')->only(['store', 'update', 'index']);
+    } */
+
     public function index()
     {
         //collection serve para pegar mais de um dado de uma vez
-        return UserResource::collection(User::all());
+        return UserResource::collection(User::with('family')->get());
     }
 
     /**
@@ -32,27 +42,28 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, User $user)
     {
+
         $validator = Validator::make($request->all(), [
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'user_cpf' => 'required|digits:11',
             'user_cell' => 'required|regex:/^\(\d{2}\) \d{5}-\d{4}$/',
             'email' => 'required|email|unique:users,email',
+            'family_id' => 'nullable|exists:families,id',
             'password' => 'required|min:8',
         ], [
             'first_name.required' => 'O nome é obrigatório.',
             'email.unique' => 'Este e-mail já está cadastrado.',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return $this->error('Dados Inválidos', 422, $validator->errors());
         }
 
         $created = User::create(($validator->validated()));
 
-        if($created){
+        if ($created) {
             return $this->response('Usuário Criado com Sucesso!', 200, new UserResource($created));
         }
         return $this->error('Erro: Usuário não foi criado', 400, $validator->errors());
@@ -78,16 +89,52 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
-        //
+        
+       /*  if (!$user->tokenCan('user-update')) {
+            return $this->error('Unauthorized', 403);
+        } */
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'user_cell' => 'required|regex:/^\(\d{2}\) \d{5}-\d{4}$/',
+            'email' => 'required|email|unique:users,email'
+            //'password' => 'required|min:8',
+        ], [
+            'first_name.required' => 'O nome é obrigatório.',
+            'email.unique' => 'Este e-mail já está cadastrado.',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->error('Dados Inválidos', 422, $validator->errors());
+        }
+
+        $validated = $validator->validated();
+
+        $updated = $user->update([
+            'first_name' => $validated['first_name'],
+            'last_name' => $validated['last_name'],
+            'user_cell' => $validated['user_cell'],
+            'email' => $validated['email'],
+        ]);
+
+        if ($updated) {
+            return $this->response('Usuário atualizado com Sucesso!', 200, new UserResource($user));
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        $deleted = $user->delete();
+
+        if ($deleted) {
+            return $this->response('Usuário deletado', 200);
+        }
+
+        return $this->error('Erro: ao deletar usuário', 400);
     }
 }

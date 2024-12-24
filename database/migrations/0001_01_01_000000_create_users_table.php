@@ -15,14 +15,16 @@ return new class extends Migration
             $table->id();
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('user_cpf');
             $table->string('user_cell');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->unsignedBigInteger('family_id')->nullable(); // Coluna para chave estrangeira
+            $table->foreign('family_id')->references('id')->on('families'); // Definição da chave estrangeira
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });
+        
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();

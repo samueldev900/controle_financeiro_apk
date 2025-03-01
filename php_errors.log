@@ -1,2 +1,11 @@
 [22-Dec-2024 16:02:33 UTC] PHP Parse error:  syntax error, unexpected token "}", expecting ";" in C:\Users\samue\OneDrive\Área de Trabalho\Codigos\2.controle_financeiro_apk\app\Models\User.php on line 55
 [22-Dec-2024 16:02:45 UTC] PHP Parse error:  syntax error, unexpected token "}", expecting ";" in C:\Users\samue\OneDrive\Área de Trabalho\Codigos\2.controle_financeiro_apk\app\Models\User.php on line 55
+[01-Mar-2025 16:44:27 America/Sao_Paulo] PHP Fatal error:  Trait "App\Models\HasFactory" not found in C:\Users\samue\OneDrive\Área de Trabalho\Codigos\2.controle_financeiro_apk\app\Models\Renda.php on line 7
+[01-Mar-2025 16:44:27 America/Sao_Paulo] PHP Stack trace:
+[01-Mar-2025 16:44:27 America/Sao_Paulo] PHP   1. {main}() Command line code:0
+[01-Mar-2025 16:44:27 America/Sao_Paulo] PHP   2. {main}() Command line code:0
+[01-Mar-2025 16:44:32 America/Sao_Paulo] PHP Fatal error:  Trait "App\Models\HasFactory" not found in C:\Users\samue\OneDrive\Área de Trabalho\Codigos\2.controle_financeiro_apk\app\Models\Renda.php on line 7
+[01-Mar-2025 16:44:32 America/Sao_Paulo] PHP Stack trace:
+[01-Mar-2025 16:44:32 America/Sao_Paulo] PHP   1. {main}() Command line code:0
+[01-Mar-2025 16:44:32 America/Sao_Paulo] PHP   2. {main}() Command line code:0
+[01-Mar-2025 17:30:53 America/Sao_Paulo] PHP Parse error:  syntax error, unexpected token "protected" in C:\Users\samue\OneDrive\Área de Trabalho\Codigos\2.controle_financeiro_apk\app\Models\Renda.php on line 14

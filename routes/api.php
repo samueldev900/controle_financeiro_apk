@@ -51,6 +51,9 @@ Route::prefix('v1')->group(function () {
         return response()->json(['message' => 'Verification email resent.']);
     })->middleware(['auth:sanctum']); */
 
-
-    Route::post('/renda',[RendaController::class, 'store']);
+    Route::post('/renda',[RendaController::class, 'store']); // cadastrando novas rendas
+    Route::get('/renda',[RendaController::class, 'index']); // Listando todas as rendas
+    Route::get('/renda/{renda}',[RendaController::class, 'show']); // Listando uma renda em especifico
+    Route::put('/renda/{renda}',[RendaController::class, 'update']); // Atualizando uma renda
+    Route::delete('/renda/{renda}',[RendaController::class, 'destroy']); // Deletando uma renda
 });

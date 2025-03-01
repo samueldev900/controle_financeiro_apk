@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class RendaModel extends Model
+class Renda extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     // Define a tabela associada (caso o nome não siga o padrão Laravel)
     protected $table = 'renda';

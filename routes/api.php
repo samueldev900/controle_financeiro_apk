@@ -3,9 +3,12 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\V1\UserController;
-use App\Http\Controllers\Api\V1\FamilyController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Api\V1\UserController;
+use App\Http\Controllers\api\V1\RendaController;
+use App\Http\Controllers\Api\V1\FamilyController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+
 
 /* Route::get('/user', function (Request $request) {
     return $request->user();
@@ -17,13 +20,13 @@ use App\Http\Controllers\AuthController;
 Route::prefix('v1')->group(function () {
 
     //Users
-    
+
     //Route::apiResource('users', UserController::class); Agrupa todas as rotas acima 
-    
+
     /* Rotas protegidas pelo Auth Sanctum */
     Route::post('/users', [UserController::class, 'store']); // Cadastrando novos Usuários
-    Route::middleware('auth:sanctum')->group(function(){
-        
+    Route::middleware('auth:sanctum')->group(function () {
+
         /* Rotas dos Users */
         Route::get('/users', [UserController::class, 'index']); // Listando todos os usuários
         Route::delete('/users/{user}', [UserController::class, 'destroy']); //Deletando Usuário
@@ -38,5 +41,16 @@ Route::prefix('v1')->group(function () {
     Route::get('/families', [FamilyController::class, 'index']);
 
     /* Login e cria o token*/
-    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+/*     Route::get('verify-email/{id}/{hash}', [AuthController::class, 'verifyEmail'])->name('verification.verify');
+    
+    Route::post('/email/resend', function (Request $request) {
+        $request->user()->sendEmailVerificationNotification();
+
+        return response()->json(['message' => 'Verification email resent.']);
+    })->middleware(['auth:sanctum']); */
+
+
+    Route::post('/renda',[RendaController::class, 'store']);
 });

@@ -9,7 +9,7 @@ use App\Traits\HttpResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Sanctum\HasApiTokens;
-
+use Illuminate\Auth\Events\Registered;
 
 class UserController extends Controller
 {
@@ -42,9 +42,9 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, User $user)
+    public function store(Request $request)
     {
-
+        // Validação dos dados
         $validator = Validator::make($request->all(), [
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
@@ -55,20 +55,28 @@ class UserController extends Controller
         ], [
             'first_name.required' => 'O nome é obrigatório.',
             'email.unique' => 'Este e-mail já está cadastrado.',
+            'user_cell.regex' => 'Número de Telefone inválido'
         ]);
-
+    
+        // Verificando se a validação falhou
         if ($validator->fails()) {
             return $this->error('Dados Inválidos', 422, $validator->errors());
         }
-
-        $created = User::create(($validator->validated()));
-
+    
+        // Criando o usuário
+        $created = User::create($validator->validated());
+    
+        // Se o usuário foi criado, envia a notificação de verificação de e-mail
         if ($created) {
+            event(new Registered($created)); // Disparando o evento de registro
+            $created->sendEmailVerificationNotification(); // Enviando a notificação de verificação
             return $this->response('Usuário Criado com Sucesso!', 200, new UserResource($created));
         }
+    
+        // Se o usuário não foi criado, retorna erro
         return $this->error('Erro: Usuário não foi criado', 400, $validator->errors());
     }
-
+    
     /**
      * Display the specified resource.
      */

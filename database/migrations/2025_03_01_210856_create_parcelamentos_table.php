@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('renda', function (Blueprint $table) {
-            $table->id('renda_id');
+        Schema::create('parcelamentos', function (Blueprint $table) {
+            $table->id('id_parcelamento');
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('origin');
-            $table->string('tipo_renda');
-            $table->decimal('valor', 10, 2);
+            $table->string('descricao');
+            $table->bigInteger('numero_parcelas');
+            $table->decimal('valor_total', 10, 2);
+            $table->dateTime('primeiro_vencimento');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('parcelamentos');
     }
 };

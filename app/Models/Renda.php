@@ -21,4 +21,9 @@ class Renda extends Model
 
     // Desativa timestamps (caso sua tabela não tenha `created_at` e `updated_at`)
     public $timestamps = false;
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

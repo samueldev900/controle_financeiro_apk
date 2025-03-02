@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Family;
+use App\Models\Parcelamento;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -14,8 +15,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Family::factory(10)->create();
-        User::factory(10)->create();
+        //Family::factory(10)->create();
+        //User::factory(10)->create();
+        Parcelamento::factory(10)->create();
 
         /* User::factory()->create([
             'name' => 'Test User',

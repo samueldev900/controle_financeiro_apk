@@ -17,7 +17,7 @@ class RendaController extends Controller
      */
     public function index()
     {
-        return RendaResource::collection(Renda::all());
+        return RendaResource::collection(Renda::with('user')->get());
     }
 
     /**

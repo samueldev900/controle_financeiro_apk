@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use App\Models\Family;
 use App\Models\Parcelamento;
-use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\PagamentoFixo;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,7 +18,9 @@ class DatabaseSeeder extends Seeder
     {
         //Family::factory(10)->create();
         //User::factory(10)->create();
-        Parcelamento::factory(10)->create();
+        //Parcelamento::factory(10)->create();
+        
+        PagamentoFixo::factory(10)->create();
 
         /* User::factory()->create([
             'name' => 'Test User',

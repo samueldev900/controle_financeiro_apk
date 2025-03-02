@@ -9,3 +9,4 @@
 [01-Mar-2025 16:44:32 America/Sao_Paulo] PHP   1. {main}() Command line code:0
 [01-Mar-2025 16:44:32 America/Sao_Paulo] PHP   2. {main}() Command line code:0
 [01-Mar-2025 17:30:53 America/Sao_Paulo] PHP Parse error:  syntax error, unexpected token "protected" in C:\Users\samue\OneDrive\Área de Trabalho\Codigos\2.controle_financeiro_apk\app\Models\Renda.php on line 14
+[02-Mar-2025 16:27:31 America/Sao_Paulo] PHP Parse error:  syntax error, unexpected token "}" in C:\Users\samue\OneDrive\Área de Trabalho\Codigos\2.controle_financeiro_apk\app\Models\PagamentoFixo.php on line 13

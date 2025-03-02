@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\V1\UserController;
 use App\Http\Controllers\api\V1\RendaController;
 use App\Http\Controllers\ParcelamentoController;
 use App\Http\Controllers\Api\V1\FamilyController;
+use App\Http\Controllers\PagamentoFixoController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 
@@ -62,4 +63,11 @@ Route::prefix('v1')->group(function () {
     Route::post('/parcelamento', [ParcelamentoController::class, 'store']); // Cadastra um novo parcelamento
     Route::put('/parcelamento/{parcelamento}', [ParcelamentoController::class, 'update']); // Atualiza um parcelamento
     Route::delete('/parcelamento/{parcelamento}', [ParcelamentoController::class, 'destroy']); // Deleta um parcelamento
+
+
+    Route::get('/pagamento-fixo', [PagamentoFixoController::class, 'index']); // Listando todos os pagamentos fixos
+    Route::get('/pagamento-fixo/{pagamentoFixo}', [PagamentoFixoController::class, 'show']); // Listando um pagamento fixo em especifico
+    Route::post('/pagamento-fixo', [PagamentoFixoController::class, 'store']); // cadastrando novos pagamentos fixos
+    Route::put('/pagamento-fixo/{pagamentoFixo}', [PagamentoFixoController::class, 'update']); // Atualizando um pagamento fixo
+    Route::delete('/pagamento-fixo/{pagamentoFixo}', [PagamentoFixoController::class, 'destroy']); // Deletando um pagamento fixo
 });

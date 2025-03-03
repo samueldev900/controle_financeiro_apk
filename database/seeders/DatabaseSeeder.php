@@ -7,6 +7,7 @@ use App\Models\Family;
 use App\Models\Parcelamento;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\PagamentoFixo;
+use App\Models\PagamentoVariavel;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,7 +21,8 @@ class DatabaseSeeder extends Seeder
         //User::factory(10)->create();
         //Parcelamento::factory(10)->create();
         
-        PagamentoFixo::factory(10)->create();
+        //PagamentoFixo::factory(10)->create();
+        PagamentoVariavel::factory(10)->create();
 
         /* User::factory()->create([
             'name' => 'Test User',

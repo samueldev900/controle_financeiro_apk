@@ -6,9 +6,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Api\V1\UserController;
 use App\Http\Controllers\api\V1\RendaController;
-use App\Http\Controllers\ParcelamentoController;
+use App\Http\Controllers\Api\V1\ParcelamentoController;
 use App\Http\Controllers\Api\V1\FamilyController;
-use App\Http\Controllers\PagamentoFixoController;
+use App\Http\Controllers\Api\V1\PagamentoFixoController;
+use App\Http\Controllers\Api\V1\PagamentoVariavelController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 
@@ -70,4 +71,11 @@ Route::prefix('v1')->group(function () {
     Route::post('/pagamento-fixo', [PagamentoFixoController::class, 'store']); // cadastrando novos pagamentos fixos
     Route::put('/pagamento-fixo/{pagamentoFixo}', [PagamentoFixoController::class, 'update']); // Atualizando um pagamento fixo
     Route::delete('/pagamento-fixo/{pagamentoFixo}', [PagamentoFixoController::class, 'destroy']); // Deletando um pagamento fixo
+
+
+    Route::get('/pagamento-variavel', [PagamentoVariavelController::class, 'index']); //Lista todos os pagamentos variaveis
+    Route::get('/pagamento-variavel/{pagamentoVariavel}', [PagamentoVariavelController::class, 'show']); //Mostra um pagamento especifico
+    Route::post('/pagamento-variavel', [PagamentoVariavelController::class, 'store']); // Registra um novo pagamento
+    Route::put('/pagamento-variavel/{pagamentoVariavel}', [PagamentoVariavelController::class, 'update']); //Atualizando um pagamento
+    Route::delete('/pagamento-variavel/{pagamentoVariavel}', [PagamentoVariavelController::class, 'destroy']); // Deletando um registro
 });
